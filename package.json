@@ -1,0 +1,25 @@
+{
+  "name": "starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/halafi/starter",
+  "author": "Filip Halas",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production webpack -p --config webpack.config.js",
+    "dev": "webpack-dev-server",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^21.2.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
