@@ -5,11 +5,13 @@
     "react",
     "jsx-a11y",
     "import",
-    "flowtype"
+    "flowtype",
+    "jest"
   ],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "rules": {
     "semi": ["warn", "never"],
