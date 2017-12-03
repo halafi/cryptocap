@@ -1,0 +1,20 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "flowtype"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "semi": ["warn", "never"],
+    "no-unused-vars": ["warn"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/prefer-stateless-function": ["warn"]
+  }
+}
