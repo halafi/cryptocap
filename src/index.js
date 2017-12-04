@@ -21,6 +21,7 @@ const store = createStore(
 )
 
 store.dispatch(actions.fetchCoinList())
+store.dispatch(actions.fetchCoinExtras())
 
 render(
   <Provider store={store}>

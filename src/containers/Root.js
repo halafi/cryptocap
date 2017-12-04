@@ -3,19 +3,25 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { coinSelector } from '../selectors/coinSelectors'
+import { coinSelector, coinExtrasSelector } from '../selectors/coinSelectors'
 
-import type { Output as Coins } from '../services/cryptoCompareMapper'
+import type { Coin } from '../services/coinMarketCap'
+import type { Coin as CoinExtra } from '../services/cryptoCompareMapper'
 
 type Props = {
-  coins: Coins,
+  coins: Array<Coin>,
+  coinExtras: {
+    [key: string]: CoinExtra,
+  },
 }
 
 class Root extends PureComponent<Props> {
   render() {
-    const { coins } = this.props
+    const { coins, coinExtras } = this.props
+    console.log(coins)
+    console.log(coinExtras)
 
-    if (!coins) {
+    if (!coins || !coinExtras) {
       return null
     }
 
@@ -23,21 +29,33 @@ class Root extends PureComponent<Props> {
       <div className="Root">
         <table>
           <thead>
-            <th>Index</th>
-            <th>Name</th>
-            <th>Symbol</th>
-            <th>Logo</th>
-            <th>Link</th>
-
+            <tr>
+              <th />
+              <th>Name</th>
+              <th>Symbol</th>
+              <th>Price (USD)</th>
+              <th>Volume (24h)</th>
+              <th>Supply (av/max)</th>
+              <th>Market cap (USD)</th>
+              <th>Change (1h)</th>
+              <th>Change (24h)</th>
+              <th>Change (7d)</th>
+            </tr>
           </thead>
           <tbody>
-            {Object.keys(coins).map((key, i) => (
-              <tr key={coins[key].id}>
-                <td>{i}</td>
-                <td>{coins[key].name}</td>
-                <td>{coins[key].symbol}</td>
-                <td><img alt="logo" width="32" height="32" src={coins[key].imageUrl} /></td>
-                <td><a href={coins[key].linkUrl}>{coins[key].linkUrl}</a></td>
+            {coins.map((coin, i) => (
+              <tr key={coin.id}>
+                <td>{coinExtras[coin.symbol] && <img alt="logo" width="32" height="32" src={coinExtras[coin.symbol].imageUrl} />}</td>
+                <td>{coin.name}</td>
+                <td>{coin.symbol}</td>
+                <td>{coin.priceUsd}</td>
+                <td>{coin.volumeUsd}</td>
+                <td>{coin.availableSupply} / {coin.maxSupply}</td>
+                <td>{coin.marketCapUsd}</td>
+                <td>{coin.change1h} %</td>
+                <td>{coin.change24h} %</td>
+                <td>{coin.change7d} %</td>
+
               </tr>))
             }
           </tbody>
@@ -50,4 +68,5 @@ class Root extends PureComponent<Props> {
 
 export default connect(state => ({
   coins: coinSelector(state),
+  coinExtras: coinExtrasSelector(state),
 }))(Root)

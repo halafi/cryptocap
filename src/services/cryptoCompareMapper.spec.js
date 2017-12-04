@@ -1,7 +1,7 @@
-import { sortObject } from './helpers'
+import { getSortedKeysBySortOrder } from './cryptoCompareMapper'
 
 describe('helpers', () => {
-  test('sortObject', () => {
+  test('getSortedKeys', () => {
     const input = {
       FOO: {
         sortOrder: 374,
@@ -19,7 +19,7 @@ describe('helpers', () => {
         sortOrder: 123,
       },
     }
-    const output = ['BAR', 'DEF', 123, 'FOO', 'ABC']
-    expect(Object.keys(sortObject(input))).toEqual(output)
+    const output = ['BAR', 'DEF', '123', 'FOO', 'ABC']
+    expect(getSortedKeysBySortOrder(input)).toEqual(output)
   })
 })

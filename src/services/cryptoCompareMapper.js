@@ -1,6 +1,5 @@
 // @flow
 import * as R from 'ramda'
-import { sortObject } from './helpers'
 
 type DataType = {
   [key: string]: {
@@ -22,7 +21,7 @@ type Input = {
   Data: DataType,
 }
 
-export type Output = {
+export type Coin = {
   id: string,
   name: string,
   symbol: string,
@@ -30,11 +29,24 @@ export type Output = {
   linkUrl: string,
 }
 
-export default function cryptoCompareMapper(input: Input): Output {
+export const getSortedKeysBySortOrder = R.compose(
+  R.map(R.head),
+  R.sort((a, b) => {
+    if (a[1].sortOrder > b[1].sortOrder) {
+      return 1
+    }
+    if (a[1].sortOrder < b[1].sortOrder) {
+      return -1
+    }
+    return 0
+  }),
+  R.toPairs,
+)
+
+export default function cryptoCompareMapper(input: Input): Coin {
   const { BaseImageUrl, BaseLinkUrl, Data } = input
 
   const output = R.compose(
-    sortObject,
     R.reduce((acc, k) => {
       acc[k] = {
         id: Data[k].Id,
@@ -42,13 +54,16 @@ export default function cryptoCompareMapper(input: Input): Output {
         symbol: Data[k].Symbol,
         imageUrl: BaseImageUrl + Data[k].ImageUrl,
         linkUrl: BaseLinkUrl + Data[k].Url,
-        sortOrder: Number(Data[k].SortOrder),
+        // sortOrder: Number(Data[k].SortOrder),
       }
       return acc
     }, {}),
     R.keys,
   )(Data)
 
-  // TODO: refactor, remove sortOrder
   return output
+  // const sortedObjectKeys: Array = getSortedKeysBySortOrder(output)
+  // const sortedCoins: Array = R.map(key => output[key])(sortedObjectKeys)
+
+  // return sortedCoins
 }
