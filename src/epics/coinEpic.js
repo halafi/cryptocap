@@ -6,6 +6,7 @@ import coinMarketCapApi from '../services/coinMarketCap'
 import cryptoCompareMapper from '../services/cryptoCompareMapper'
 import coinMarketCapMapper from '../services/coinMarketCapMapper'
 
+
 const fetchCoinListEpic = action$ =>
   action$
     .ofType(FETCH_COIN_LIST)

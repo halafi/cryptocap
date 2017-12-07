@@ -15,6 +15,11 @@ type Props = {
   },
 }
 
+const formatUsd = (input: number, fractions: number = 2): string =>
+  input.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: fractions })
+
+const formatPercentage = (input: number): string => `${input.toFixed(2)}%`
+
 class Root extends PureComponent<Props> {
   render() {
     const { coins, coinExtras } = this.props
@@ -34,9 +39,8 @@ class Root extends PureComponent<Props> {
               <th>Name</th>
               <th>Symbol</th>
               <th>Price (USD)</th>
-              <th>Volume (24h)</th>
-              <th>Supply (av/max)</th>
               <th>Market cap (USD)</th>
+              <th>Volume (24h)</th>
               <th>Change (1h)</th>
               <th>Change (24h)</th>
               <th>Change (7d)</th>
@@ -48,13 +52,12 @@ class Root extends PureComponent<Props> {
                 <td>{coinExtras[coin.symbol] && <img alt="logo" width="32" height="32" src={coinExtras[coin.symbol].imageUrl} />}</td>
                 <td>{coin.name}</td>
                 <td>{coin.symbol}</td>
-                <td>{coin.priceUsd}</td>
-                <td>{coin.volumeUsd}</td>
-                <td>{coin.availableSupply} / {coin.maxSupply}</td>
-                <td>{coin.marketCapUsd}</td>
-                <td>{coin.change1h} %</td>
-                <td>{coin.change24h} %</td>
-                <td>{coin.change7d} %</td>
+                <td>{formatUsd(coin.priceUsd)}</td>
+                <td>{formatUsd(coin.marketCapUsd, 0)}</td>
+                <td>{formatUsd(coin.volumeUsd)}</td>
+                <td>{formatPercentage(coin.change1h)}</td>
+                <td>{formatPercentage(coin.change24h)}</td>
+                <td>{formatPercentage(coin.change7d)}</td>
 
               </tr>))
             }
