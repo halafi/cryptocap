@@ -16,6 +16,7 @@
   "rules": {
     "semi": ["warn", "never"],
     "no-unused-vars": ["warn"],
+    "no-confusing-arrow": ["off"], // silence styled components
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/prefer-stateless-function": ["warn"]
   }
