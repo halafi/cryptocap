@@ -16,35 +16,36 @@ type Props = {
 }
 
 const DashboardDiv = styled.div`
-    margin: auto;
-    width: 50%;
-    font-family: 'Roboto', sans-serif;
+  margin: auto;
+  width: 50%;
+  font-family: 'Roboto', sans-serif;
 `
 
 const Table = styled.table`
-     border: 1px solid black;
-     border-collapse: collapse;
-     width: 100%;
-     th, td {
-        text-align: right;
-        padding: 8px;
-        &:first-child {
-           text-align: left; 
-        }
-     }
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+  th,
+  td {
+    text-align: right;
+    padding: 8px;
+    &:first-child {
+      text-align: left;
+    }
+  }
 `
 
 const CoinIcon = styled.img`
-    width: 16px;
-    height: 16px;
+  width: 16px;
+  height: 16px;
 `
 
 const PriceChange = styled.span`
-    color: ${props => props.positive ? 'green' : 'red'};
+  color: ${props => (props.positive ? 'green' : 'red')};
 `
 
-const Dashboard = ({ coins, coinExtras }: Props) =>
-  (<DashboardDiv>
+const Dashboard = ({ coins, coinExtras }: Props) => (
+  <DashboardDiv>
     <Table>
       <thead>
         <tr>
@@ -61,7 +62,17 @@ const Dashboard = ({ coins, coinExtras }: Props) =>
       <tbody>
         {coins.map(coin => (
           <tr key={coin.id}>
-            <td><CoinIcon alt="logo" src={coinExtras[coin.symbol] ? coinExtras[coin.symbol].imageUrl : './images/missing_icon.png'} /> {coin.name}</td>
+            <td>
+              <CoinIcon
+                alt="logo"
+                src={
+                  coinExtras[coin.symbol]
+                    ? coinExtras[coin.symbol].imageUrl
+                    : './images/missing_icon.png'
+                }
+              />{' '}
+              {coin.name}
+            </td>
             <td>{coin.symbol}</td>
             <td>{formatUsd(coin.priceUsd)}</td>
             <td>{formatUsd(coin.marketCapUsd, 0)}</td>
@@ -81,10 +92,11 @@ const Dashboard = ({ coins, coinExtras }: Props) =>
                 {formatPercentage(coin.change7d)}
               </PriceChange>
             </td>
-          </tr>))
-      }
+          </tr>
+        ))}
       </tbody>
     </Table>
-  </DashboardDiv>)
+  </DashboardDiv>
+)
 
 export default Dashboard

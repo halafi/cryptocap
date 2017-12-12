@@ -12,7 +12,7 @@ type DataType = {
     TotalCoinsFreeFloat: string,
     Url: string,
     SortOrder: string, // number
-  }
+  },
 }
 
 type Input = {

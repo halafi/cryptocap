@@ -8,7 +8,7 @@ type Input = {
   rank: string, // number
   price_usd: string, // number
   price_btc: string, // number
-  "24h_volume_usd": string, // number
+  '24h_volume_usd': string, // number
   market_cap_usd: string, // number
   available_supply: string, // number
   total_supply: string, // number

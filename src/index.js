@@ -14,10 +14,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose 
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(
-    applyMiddleware(logger),
-    applyMiddleware(epicMiddleware),
-  ),
+  composeEnhancers(applyMiddleware(logger), applyMiddleware(epicMiddleware)),
 )
 
 store.dispatch(actions.fetchCoinList())

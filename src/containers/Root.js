@@ -24,12 +24,7 @@ class Root extends PureComponent<Props> {
       return null
     }
 
-    return (
-      <Dashboard
-        coins={coins}
-        coinExtras={coinExtras}
-      />
-    )
+    return <Dashboard coins={coins} coinExtras={coinExtras} />
   }
 }
 
