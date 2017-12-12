@@ -1,8 +1,8 @@
-# Name - TODO
+# Cryptocap
 
-TODO
+simple wrapper over public crypto APIs to get price list
 
 ## How to use
 
 1. clone
-2. TODO
+2. `npm run dev` or `npm start`
